@@ -11,15 +11,13 @@ from precipitacao_page import precipitacao_page
 
 # Inicializando o aplicativo Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-#sijdjjoasia
+
 # Definindo o layout do aplicativo
 sidebar = html.Div(
     [
         html.H2("Weamet", className="display-4"),
         html.Hr(),
-        html.P(
-            "Navegue pelas páginas", className="lead"
-        ),
+        html.P("Navegue pelas páginas", className="lead"),
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
@@ -41,13 +39,13 @@ sidebar = html.Div(
         'bottom': 0,
         'width': '250px',
         'padding': '20px',
-        'background-color': '#f8f9fa',
+        'backgroundColor': '#f8f9fa',
     },
 )
 
 content = html.Div(
     id="page-content",
-    style={"margin-left": "270px", "padding": "20px"}
+    style={"marginLeft": "270px", "padding": "20px"}
 )
 
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
@@ -58,6 +56,22 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
     [Input('url', 'pathname')]
 )
 def display_page(pathname):
+    card_style = {
+        'backgroundColor': '#ffffff',
+        'border': 'none',
+        'borderRadius': '10px',
+        'padding': '20px',
+        'margin': '10px',
+        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
+        'textAlign': 'center',
+        'cursor': 'pointer',
+        'width': '350px',
+        'height': '350px',
+        'transition': 'background-color 0.3s',
+        'textDecoration': 'none',
+        'color': '#000'
+    }
+
     if pathname == '/':
         return html.Div([
             html.H1("Weamet", style={'textAlign': 'center', 'color': '#000'}),
@@ -68,71 +82,35 @@ def display_page(pathname):
                         [
                             dbc.Col(
                                 dbc.Button(
-                                    [html.Img(src='https://img.icons8.com/ios/80/000000/wind.png', style={'width': '80px', 'height': '80px'}),
-                                    html.H3("Vento", style={'margin': '0', 'color': '#000'}),
-                                    html.P("asdijadiaosjoida")],  # conteudo do vento
+                                    [
+                                        html.Img(src='https://img.icons8.com/ios/80/000000/wind.png', style={'width': '80px', 'height': '80px'}),
+                                        html.H3("Vento", style={'margin': '0', 'color': '#000'}),
+                                        html.P("Informações sobre vento")
+                                    ],
                                     href="/pages/Vento",
-                                    style={
-                                        'backgroundColor': '#ffffff',
-                                        'border': 'none',
-                                        'borderRadius': '10px',
-                                        'padding': '20px',
-                                        'margin': '10px',
-                                        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                        'textAlign': 'center',
-                                        'cursor': 'pointer',
-                                        'width': '350px',
-                                        'height': '350px',
-                                        'transition': 'background-color 0.3s',
-                                        'textDecoration': 'none',
-                                        'color': '#000'
-                                    }
+                                    style=card_style
                                 ),
                                 width=4,
                             ),
                             dbc.Col(
                                 dbc.Button(
-                                    [html.Img(src='https://img.icons8.com/ios/80/000000/thermometer.png', style={'width': '80px', 'height': '80px'}),
-                                    html.H3("Temperatura", style={'margin': '0', 'color': '#000'})],
+                                    [
+                                        html.Img(src='https://img.icons8.com/ios/80/000000/thermometer.png', style={'width': '80px', 'height': '80px'}),
+                                        html.H3("Temperatura", style={'margin': '0', 'color': '#000'})
+                                    ],
                                     href="/pages/Temperatura",
-                                    style={
-                                        'backgroundColor': '#ffffff',
-                                        'border': 'none',
-                                        'borderRadius': '10px',
-                                        'padding': '20px',
-                                        'margin': '10px',
-                                        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                        'textAlign': 'center',
-                                        'cursor': 'pointer',
-                                        'width': '350px',
-                                        'height': '350px',
-                                        'transition': 'background-color 0.3s',
-                                        'textDecoration': 'none',
-                                        'color': '#000'
-                                    }
+                                    style=card_style
                                 ),
                                 width=4,
                             ),
                             dbc.Col(
                                 dbc.Button(
-                                    [html.Img(src='https://img.icons8.com/ios/80/000000/humidity.png', style={'width': '80px', 'height': '80px'}),
-                                    html.H3("Umidade", style={'margin': '0', 'color': '#000'})],
+                                    [
+                                        html.Img(src='https://img.icons8.com/ios/80/000000/humidity.png', style={'width': '80px', 'height': '80px'}),
+                                        html.H3("Umidade", style={'margin': '0', 'color': '#000'})
+                                    ],
                                     href="/pages/Umidade",
-                                    style={
-                                        'backgroundColor': '#ffffff',
-                                        'border': 'none',
-                                        'borderRadius': '10px',
-                                        'padding': '20px',
-                                        'margin': '10px',
-                                        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                        'textAlign': 'center',
-                                        'cursor': 'pointer',
-                                        'width': '350px',
-                                        'height': '350px',
-                                        'transition': 'background-color 0.3s',
-                                        'textDecoration': 'none',
-                                        'color': '#000'
-                                    }
+                                    style=card_style
                                 ),
                                 width=4,
                             )
@@ -143,88 +121,51 @@ def display_page(pathname):
                         [
                             dbc.Col(
                                 dbc.Button(
-                                    [html.Img(src='https://img.icons8.com/ios/50/000000/barometer.png', style={'width': '80px', 'height': '80px'}),
-                                    html.H3("Pressão Atmosférica", style={'margin': '0', 'color': '#000'})],
+                                    [
+                                        html.Img(src='https://img.icons8.com/ios/50/000000/barometer.png', style={'width': '80px', 'height': '80px'}),
+                                        html.H3("Pressão Atmosférica", style={'margin': '0', 'color': '#000'})
+                                    ],
                                     href="/pages/Pressao_Atmosferica",
-                                    style={
-                                        'backgroundColor': '#ffffff',
-                                        'border': 'none',
-                                        'borderRadius': '10px',
-                                        'padding': '20px',
-                                        'margin': '10px',
-                                        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                        'textAlign': 'center',
-                                        'cursor': 'pointer',
-                                        'width': '350px',
-                                        'height': '350px',
-                                        'transition': 'background-color 0.3s',
-                                        'textDecoration': 'none',
-                                        'color': '#000'
-                                    }
+                                    style=card_style
                                 ),
                                 width=4,
                             ),
                             dbc.Col(
                                 dbc.Button(
-                                    [html.Img(src='https://img.icons8.com/ios/50/000000/rain.png', style={'width': '80px', 'height': '80px'}),
-                                    html.H3("Precipitação", style={'margin': '0', 'color': '#000'})],
+                                    [
+                                        html.Img(src='https://img.icons8.com/ios/50/000000/rain.png', style={'width': '80px', 'height': '80px'}),
+                                        html.H3("Precipitação", style={'margin': '0', 'color': '#000'})
+                                    ],
                                     href="/pages/Precipitacao",
-                                    style={
-                                        'backgroundColor': '#ffffff',
-                                        'border': 'none',
-                                        'borderRadius': '10px',
-                                        'padding': '20px',
-                                        'margin': '10px',
-                                        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                        'textAlign': 'center',
-                                        'cursor': 'pointer',
-                                        'width': '350px',
-                                        'height': '350px',
-                                        'transition': 'background-color 0.3s',
-                                        'textDecoration': 'none',
-                                        'color': '#000'
-                                    }
+                                    style=card_style
                                 ),
                                 width=4,
                             ),
                             dbc.Col(
                                 dbc.Button(
-                                    [html.Img(src='https://img.icons8.com/ios/80/000000/sun.png', style={'width': '80px', 'height': '80px'}),
-                                    html.H3("Luminosidade", style={'margin': '0', 'color': '#000'})],
+                                    [
+                                        html.Img(src='https://img.icons8.com/ios/80/000000/sun.png', style={'width': '80px', 'height': '80px'}),
+                                        html.H3("Luminosidade", style={'margin': '0', 'color': '#000'})
+                                    ],
                                     href="/pages/Luminosidade",
-                                    style={
-                                        'backgroundColor': '#ffffff',
-                                        'border': 'none',
-                                        'borderRadius': '10px',
-                                        'padding': '20px',
-                                        'margin': '10px',
-                                        'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                                        'textAlign': 'center',
-                                        'cursor': 'pointer',
-                                        'width': '350px',
-                                        'height': '350px',
-                                        'transition': 'background-color 0.3s',
-                                        'textDecoration': 'none',
-                                        'color': '#000'
-                                    }
+                                    style=card_style
                                 ),
-                                
                                 width=4,
-                            ),
-                            dbc.Carousel(
-                                items=[
-                                    {"key": "1", "src": "https://via.placeholder.com/800x400.png?text=Slide+1"},
-                                    {"key": "2", "src": "https://via.placeholder.com/800x400.png?text=Slide+2"},
-                                    {"key": "3", "src": "https://via.placeholder.com/800x400.png?text=Slide+3"},
-                                ],
-                                controls=True,
-                                indicators=True,
-                                interval=2000,
-                                ride="carousel",
-                                style={'margin': '20px 0'}
                             )
                         ],
                         justify="center",
+                    ),
+                    dbc.Carousel(
+                        items=[
+                            {"key": "1", "src": "https://via.placeholder.com/800x400.png?text=Slide+1"},
+                            {"key": "2", "src": "https://via.placeholder.com/800x400.png?text=Slide+2"},
+                            {"key": "3", "src": "https://via.placeholder.com/800x400.png?text=Slide+3"},
+                        ],
+                        controls=True,
+                        indicators=True,
+                        interval=2000,
+                        ride="carousel",
+                        style={'margin': '20px 0'}
                     )
                 ]
             )
