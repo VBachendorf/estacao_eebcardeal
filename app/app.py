@@ -11,7 +11,7 @@ from precipitacao_page import precipitacao_page
 
 # Inicializando o aplicativo Dash
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
+#sijdjjoasia
 # Definindo o layout do aplicativo
 sidebar = html.Div(
     [
