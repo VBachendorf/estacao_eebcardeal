@@ -2,16 +2,31 @@ import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
-from vento_page import vento_page
-from temperatura_page import temperatura_page
-from umidade_page import umidade_page
-from luminosidade_page import luminosidade_page
-from pressaoatm_page import pressaoatm_page
-from precipitacao_page import precipitacao_page
+from pages.vento_page import vento_page
+from pages.temperatura_page import temperatura_page
+from pages.umidade_page import umidade_page
+from pages.luminosidade_page import luminosidade_page
+from pages.pressaoatm_page import pressaoatm_page
+from pages.precipitacao_page import precipitacao_page
 
-# Inicializando o aplicativo Dash
+from func.get_data import view_data
+
+#****************************************************
+# TRECHO DO CÓDOGO PARA IMPORTAR DADOS FAVOR RESPEITAR
+temp_max = view_data("""SELECT * FROM estacao.temp_data 		where cast(data_hora as date) = curdate()  
+		ORDER by temp_dht desc limit 1""")
+
+
+temp_min = view_data("""SELECT id, data_hora, id_estacao, temp_dht, umidad_dht, lumininosidade, pressao, temp_bmp, uv_intensity FROM estacao.temp_data 
+		where cast(data_hora as date) = curdate()  
+		ORDER by temp_dht asc limit 1
+		""")
+
+temp_now = view_data("""SELECT id, data_hora, id_estacao, temp_dht, umidad_dht, lumininosidade, pressao, temp_bmp, uv_intensity FROM estacao.temp_data ORDER by id desc limit 1""")
+
+
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-
 # Definindo o layout do aplicativo
 sidebar = html.Div(
     [
@@ -96,7 +111,16 @@ def display_page(pathname):
                                 dbc.Button(
                                     [
                                         html.Img(src='https://img.icons8.com/ios/80/000000/thermometer.png', style={'width': '80px', 'height': '80px'}),
-                                        html.H3("Temperatura", style={'margin': '0', 'color': '#000'})
+                                        html.H3("Temperatura", style={'margin': '0', 'color': '#000'}),
+                                        
+                                        html.H2(f"{temp_now[0]['temp_dht']} °C"),
+                                        html.P('Temperatura Atual'),
+
+                                        html.H4(f"{temp_max[0]['temp_dht']} °C"),
+                                        html.P('Temperatura Máxima'),
+                                        html.H4(f"{temp_min[0]['temp_dht']} °C"),
+                                        html.P('Temperatura Mínima')
+
                                     ],
                                     href="/pages/Temperatura",
                                     style=card_style
