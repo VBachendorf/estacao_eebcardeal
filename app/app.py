@@ -108,20 +108,34 @@ def display_page(pathname):
                                 width=4,
                             ),
                             dbc.Col(
-                                dbc.Button(
-                                    [
-                                        html.Img(src='https://img.icons8.com/ios/80/000000/thermometer.png', style={'width': '80px', 'height': '80px'}),
-                                        html.H3("Temperatura", style={'margin': '0', 'color': '#000'}),
-                                        
-                                        html.H2(f"{temp_now[0]['temp_dht']} °C"),
-                                        html.P('Temperatura Atual'),
+                            dbc.Button(
+                                [
+                                    html.Img(src='https://img.icons8.com/ios/80/000000/thermometer.png', style={'width': '80px', 'height': '80px'}),
+                                    html.H1(""),
+                                    html.H3("Temperatura", style={'margin': '0', 'color': '#000'}),
+                                    html.H2(f"{temp_now[0]['temp_dht']} °C"),
+                                    html.H1(""),
 
-                                        html.H4(f"{temp_max[0]['temp_dht']} °C"),
-                                        html.P('Temperatura Máxima'),
-                                        html.H4(f"{temp_min[0]['temp_dht']} °C"),
-                                        html.P('Temperatura Mínima')
-
-                                    ],
+                                    
+                                    dbc.Row(
+                                        [
+                                            dbc.Col(
+                                                [
+                                                    html.P('Máxima'),
+                                                    html.H4(f"{temp_max[0]['temp_dht']} °C"),
+                                                ],
+                                                width=6
+                                            ),
+                                            dbc.Col(
+                                                [
+                                                    html.P(' Mínima'),
+                                                    html.H4(f"{temp_min[0]['temp_dht']} °C"),
+                                                ],
+                                                width=6
+                                            )
+                                        ]
+                                    )   
+                                ],
                                     href="/pages/Temperatura",
                                     style=card_style
                                 ),
